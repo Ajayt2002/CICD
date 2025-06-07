@@ -1,0 +1,21 @@
+name: Windows workflow Example
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create PowerShell script
+        run: |
+          echo Write-Output "Hello from PowerShell on Windows" > hello.ps1
+
+      - name: Run PowerShell script
+        run: |
+          powershell -ExecutionPolicy Bypass -File hello.ps1
