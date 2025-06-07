@@ -1,0 +1,67 @@
+name: Ubuntu Workflow Commands Demo
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  ubuntu-demo:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout code (optional, best practice)
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Set an environment variable
+      - name: Set environment variable
+        run: echo "MY_NAME=Ajay" >> $GITHUB_ENV
+
+      # Step 3: Use the env variable
+      - name: Use environment variable
+        run: echo "Hi, I am $MY_NAME 👋"
+
+      # Step 4: Set an output value
+      - name: Set output from this step
+        id: set_output
+        run: echo "result=42" >> $GITHUB_OUTPUT
+
+      # Step 5: Use the output from previous step
+      - name: Use the output
+        run: echo "The result is ${{ steps.set_output.outputs.result }}"
+
+      # Step 6: Log grouping
+      - name: Grouped logs
+        run: |
+          echo "::group::My Grouped Section"
+          echo "Step 1"
+          echo "Step 2"
+          echo "::endgroup::"
+
+      # Step 7: Mask a secret value
+      - name: Mask secret value
+        run: echo "::add-mask::my-secret-password"
+
+      # Step 8: Log warning, error, and debug
+      - name: Custom logs
+        run: |
+          echo "::warning ::This is a warning"
+          echo "::error ::This is an error"
+          echo "::debug ::This is a debug message"
+
+      # Step 9: Use a conditional step
+      - name: Only run if result is 42
+        if: steps.set_output.outputs.result == '42'
+        run: echo "✅ Result is correct!"
+
+      # Step 10: Fail the job manually
+      - name: Force failure example
+        run: |
+          echo "::error ::Manually triggering failure"
+          exit 1
+        continue-on-error: true  # Allow workflow to continue even on failure
+
+      # Step 11: Print GitHub context as JSON
+      - name: GitHub context
+        run: echo '${{ toJSON(github) }}'
