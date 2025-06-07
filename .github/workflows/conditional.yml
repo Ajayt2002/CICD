@@ -1,0 +1,14 @@
+name: workflow-condition-example
+on: [push]
+jobs:
+    workflow-true:
+        if: github.repository == 'Ajayt2002/CICD'
+        runs-on: ubuntu-latest
+        steps:
+            - name: "workflow-condition-true"
+              run: echo "condition true"
+    workflow-false:
+        runs-on: ubuntu-latest
+        steps:
+            - name: "workflow-condition-false"
+              run: echo "condition false"
