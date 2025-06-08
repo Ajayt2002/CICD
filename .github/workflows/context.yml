@@ -1,0 +1,35 @@
+name: Workflow Context Demo
+
+on:
+  push:
+
+jobs:
+  context-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print GitHub Context Values
+        run: |
+          echo "🧑‍💻 Actor: $MY_ACTOR"
+          echo "📂 Repository: $MY_REPO"
+          echo "🔁 Ref: $MY_REF"
+          echo "📌 Event Name: $MY_EVENT"
+          echo "📁 Workflow: $MY_WORKFLOW"
+          echo "🔄 Job: $MY_JOB"
+          echo "🛠️  Run Number: $MY_RUNNUMBER"
+          echo "📄 Event Path: $MY_EVENTPATH"
+          echo "🔑 Token: $MY_TOKEN"
+          echo "💻 Runner OS: $RUNNER_OS"
+          echo "🏷️ Runner Name: $RUNNER_NAME"
+        env:
+          MY_ACTOR: ${{ github.actor }}
+          MY_REPO: ${{ github.repository }}
+          MY_REF: ${{ github.ref }}
+          MY_EVENT: ${{ github.event_name }}
+          MY_WORKFLOW: ${{ github.workflow }}
+          MY_JOB: ${{ github.job }}
+          MY_RUNNUMBER: ${{ github.run_number }}
+          MY_EVENTPATH: ${{ github.event_path }}
+          MY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUNNER_OS: ${{ runner.os }}
+          RUNNER_NAME: ${{ runner.name }}
