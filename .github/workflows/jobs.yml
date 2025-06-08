@@ -15,10 +15,10 @@ jobs:
       - name: MySecound_job
         run: |
           echo "If my first is success run only then my secound job will br run"
-    job3:
-      runs-on: ubuntu-latest
-      needs: [job1, job2]
-      steps:
-        - name: My_ThirdJob
-          run: |
-            echo "job1 and job2 success execute then on job3 will run"
+  job3:
+    runs-on: ubuntu-latest
+    needs: [job1, job2]
+    steps:
+      - name: My_ThirdJob
+        run: |
+          echo "job1 and job2 success execute then on job3 will run"
