@@ -1,0 +1,18 @@
+name: Workflow jobs
+on:
+  push:
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Myfirst job
+        runs: |
+          echo "Myfirst job is success"
+  job2:
+    runs-on: ubuntu-latest
+    needs: job1
+    steps:
+      - name: MySecound_job
+        runs: |
+          echo "If my first is success run only then my secound job will br run"
+          
